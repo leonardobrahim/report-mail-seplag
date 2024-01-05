@@ -54,7 +54,7 @@
 2024-01-03 16:47:24,103:INFO:GCT_Liquidado.qvd com data de modificação: 03/01/2024
 2024-01-03 16:47:24,111:INFO:file_cache is only supported with oauth2client<4.0.0
 2024-01-03 16:47:25,286:INFO:GCT_RPP_Canc.qvd com data de modificação: 03/01/2024
-2024-01-03 16:47:25,293:INFO:file_cache is only supported with oauth2client<4.0.0
-2024-01-03 16:47:26,363:INFO:PD.qvw com data de modificação: 03/01/2024
-2024-01-04 16:47:26,371:INFO:file_cache is only supported with oauth2client<4.0.0
-2024-01-04 16:47:27,420:INFO:GCT_Pago_CRestos.qvd com data de modificação: 03/01/2024
+2024-01-05 16:47:25,293:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-01-05 16:47:26,363:INFO:PD.qvw com data de modificação: 03/01/2024
+2024-01-05 16:47:26,371:INFO:file_cache is only supported with oauth2client<4.0.0
+2024-01-05 16:47:27,420:INFO:GCT_Pago_CRestos.qvd com data de modificação: 03/01/2024

@@ -1,3 +1,4 @@
+from email.mime.image import MIMEImage
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -13,29 +14,37 @@ REMETENTE = os.getenv('REMETENTE')
 DESTINATARIOS = os.getenv('DESTINATARIOS').split(',')
 PORTA = os.getenv('PORTA')
 
+
 def apply_warning_highlight(log):
     if 'warning' in log.lower():
-        return f'<li><font color="red">{log}</font></li>'
+        return f'<li style="list-style: none; margin-top: 15px; border: 1px solid red; padding: 15px; border-radius: 15px;">{log}</li>'
     else:
-        return f'<li>{log}</li>'
+        return f'<li style="list-style: none; margin-top: 15px; border: 1px solid gray; padding: 15px; border-radius: 15px;">{log}</li>'
+
 
 def send_mail(assunto, corpo, tabela):
-    msg = MIMEMultipart('alternative')
+    msg = MIMEMultipart('related')  # Use 'related' for images
     msg['From'] = REMETENTE
     msg['To'] = ', '.join(DESTINATARIOS)
     msg['Subject'] = assunto
 
     html_parte = MIMEText(
-        '<html><head></head>'
-        + '<body>'
-        + corpo
-        + '<br />'
-        + tabela
-        + '</body></html>',
+        f'<html><head></head>'
+        + '<body style="border-radius: 15px ;width: 50vw; padding: 20px; border: solid black 1px; text-align: center;">'
+        + '<div style=" border-radius: 10px; width: 250px; font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;" >'
+        + f'<img src="cid:header_image" style="border-radius: 10px; width: 100%; height: 100%;" alt="">{corpo}{tabela}</div></body></html>',
         'html',
     )
     msg.attach(html_parte)
 
+    # Attach the image
+    image_path = './header.png'
+    with open(image_path, 'rb') as image_file:
+        image = MIMEImage(image_file.read(), name='header.png')
+        image.add_header('Content-ID', '<header_image>')
+        msg.attach(image)
+
+    # Send the email
     with smtplib.SMTP(SERVER, PORTA) as server:
         server.starttls()
         server.login(REMETENTE, PW)
@@ -46,13 +55,13 @@ if __name__ == '__main__':
     with open('logfile.txt', 'r', encoding='utf-8') as txt_file:
         all_logs = txt_file.readlines()
         dateNowLog = [log for log in all_logs if log.startswith(today_date)]
-    
-    lista = '<ul style="list-style-type: square; padding: 10px; background-color: #C8D6E4; border-radius: 5px; margin-top: 10px; margin-bottom: 10px;">' + ''.join([
-        f'<li style="margin-bottom: 5px; color: #fff; font-size: 14px; { "border-bottom: 1px solid black;" if i != len(dateNowLog) - 1 else "" } list-style: none;">{apply_warning_highlight(log)}</li>' for i, log in enumerate(dateNowLog)
+
+    lista = f'<ul style=" align-items: center; border-top: 1px solid gray; gap: 10px;">' + ''.join([
+        apply_warning_highlight(log) for log in dateNowLog
     ]) + '</ul>'
 
     send_mail(
-        f'BI INTEGRADO - log do dia {today_date}',
-        '<h2 style="text-align:center;">BOM DIA, LOGS DE HOJE</h2>',
+        f'BI INTEGRADO - LOG: {today_date}',
+        f'<h1 style="text-align: center; color: #1e43a2; font-weight: bold;">Relatorio Diario - {today_date}</h1>',
         lista
     )
