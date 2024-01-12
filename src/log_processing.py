@@ -81,13 +81,9 @@ def apply_warning_highlight(log):
 
 def mime_text(body_title, body_content):
     font_family = \
-        "'Lucida Sans'," \
-        + " 'Lucida Sans Regular'," \
-        + " 'Lucida Grande'," \
-        + " 'Lucida Sans Unicode'," \
-        + " Geneva," \
-        + " Verdana," \
-        + " sans-serif;"
+        'Geneva,' \
+        + ' Verdana,' \
+        + ' sans-serif;'
     
     return \
         '<html>' \

@@ -19,7 +19,7 @@ def send_mail(subject, message):
     msg['To'] = ', '.join(DESTINATARIOS)
     msg['Subject'] = subject
 
-    html_parte = MIMEText(message)
+    html_parte = MIMEText(message, 'html')
     msg.attach(html_parte)
 
     # header image
