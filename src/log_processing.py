@@ -8,8 +8,7 @@ def subject_title(project_name):
 
 def body_title():
     return \
-        f'<h1 style=" border-bottom: 1px solid #C8C8C8;' \
-        + ' font-size: 40px;' \
+        f'<h1 style="' \
         + ' text-align: center;' \
         + ' color: #1e43a2;' \
         + ' font-weight: bold;' \
@@ -89,15 +88,13 @@ def mime_text(body_title, body_content):
         '<html>' \
         + '<head></head>' \
         + '<body' \
-            + ' style="border-radius: 15px;' \
-            + ' width: 50vw; min-width: 330px;' \
+            + ' style="border-radius: 10px;' \
             + ' padding: 20px;' \
             + ' border: solid #C8C8C8 1px;' \
-            + ' text-align: center;">' \
-            + ' <div style="border-radius: 10px; width: 250px;' \
-            + f' font-family: {font_family} margin: 0 auto;" >' \
+            + ' width: 50vw;' \
+            + f' font-family: {font_family} " >' \
             + ' <img src="cid:header_image" style="border-radius: 10px;' \
             + ' width: 100%; height: 100%;" alt="Header_png">' \
-            + f' {body_title}{body_content}</div><img src="cid:footer_image"' \
+            + f' {body_title}{body_content}<img src="cid:footer_image"' \
             + ' style="border-radius: 10px; width: 100%; height: 100%;"' \
             + ' alt="Footer_png"></body></html>'
