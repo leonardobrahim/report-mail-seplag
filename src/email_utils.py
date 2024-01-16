@@ -13,7 +13,7 @@ DESTINATARIOS = literal_eval(ENV['DESTINATARIOS'])
 PORTA = ENV['PORTA']
 
 
-def send_mail(subject, message):
+def sender(subject, message):
     msg = MIMEMultipart('related')
     msg['From'] = REMETENTE
     msg['To'] = ', '.join(DESTINATARIOS)

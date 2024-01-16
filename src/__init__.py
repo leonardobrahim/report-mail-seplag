@@ -1,2 +1,2 @@
-from .email_sender import send_mail
+from .email_utils import sender
 from .log_processing import *
