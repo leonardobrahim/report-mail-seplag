@@ -15,7 +15,7 @@ def body_title():
         + f' ">Relatório Diário - {TODAY_DATE}</h1>'
 
 
-def all_logs(log_file) -> list[tuple]:
+def all_logs(log_file):
     with open(log_file, 'r', encoding='utf-8') as txt_file:
         all_logs = txt_file.readlines()
 
@@ -26,7 +26,7 @@ def all_logs(log_file) -> list[tuple]:
     return logs_with_date
 
 
-def last_logs(log_file) -> list[tuple]:
+def last_logs(log_file):
     all_logs_ = all_logs(log_file)
     return [
         (date_, log_) for date_, log_ in all_logs_ if date_ == all_logs_[-1][0]
