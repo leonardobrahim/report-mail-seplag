@@ -27,9 +27,9 @@ def send_mail(assunto, corpo, tabela):
     msg['From'] = REMETENTE
     msg['To'] = ', '.join(DESTINATARIOS)
     msg['Subject'] = assunto
-
+    
     html_parte = MIMEText(
-        f'<html><head></head>'
+       f'<html><head></head>'
         + '<body style="border-radius: 15px; width: 50vw; min-width: 330px; padding: 20px; border: solid #C8C8C8 1px; text-align: center;">'
         + '<div style="border-radius: 10px; width: 250px; font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif; margin: 0 auto;" >'
         + f'<img src="cid:header_image" style="border-radius: 10px; width: 100%; height: 100%;" alt="Header_png"> {corpo}{tabela}</div>'
@@ -70,7 +70,7 @@ if __name__ == '__main__':
     ]) + '</ul>'
 
     send_mail(
-        f'BI INTEGRADO - LOG: {today_date}',
-        f'<h1 style=" border-bottom: 1px solid #C8C8C8; font-size: 40px; text-align: center; color: #1e43a2; font-weight: bold;">Relatório Diário - {today_date}</h1>',
+        f'EMAIL DE TESTE: {today_date}',
+        f'<h1 style=" border-bottom: 1px solid #C8C8C8; font-size: 40px; text-align: center; color: #1e43a2; font-weight: bold;">Email de teste - {today_date}</h1>',
         lista
     )
