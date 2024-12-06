@@ -21,6 +21,7 @@ filtered_df["% Liquidado"] = (filtered_df["Liquidado"] / filtered_df["Dotação 
 filtered_df = filtered_df.drop(columns=["Ano"])
 
 # Gera a tabela HTML
+# Remova qualquer linha que tente inserir títulos antes da tabela
 html_table = filtered_df.to_html(
     index=False,
     border=1,
@@ -29,22 +30,18 @@ html_table = filtered_df.to_html(
     table_id="execucao-orcamentaria",
 )
 
-# Adiciona título e estrutura HTML
+# Adicione manualmente ao HTML somente o que é necessário
 html_content = f"""
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Posição da execução orçamentária por UO 2024</title>
     <style>
         body {{
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 20px;
-        }}
-        h1 {{
-            color: #1e43a2;
         }}
         .styled-table {{
             margin: 0 auto;
@@ -62,7 +59,7 @@ html_content = f"""
     </style>
 </head>
 <body>
-    <h1>Posição da execução orçamentária por UO 2024</h1>
+    <!-- Título opcional -->
     {html_table}
 </body>
 </html>
