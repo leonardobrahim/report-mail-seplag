@@ -5,7 +5,7 @@ from email.mime.text import MIMEText
 from datetime import datetime
 from dotenv import load_dotenv
 import os
-
+from gerartabela import df_html
 load_dotenv()
 
 SERVER = os.getenv('SERVER')
@@ -15,8 +15,8 @@ DESTINATARIOS = os.getenv('DESTINATARIOS').split(',')
 PORTA = os.getenv('PORTA')
 
 
-def read_html(file_path):
-    with open(file_path, 'r', encoding='utf-8') as file:
+def read_html(df_html):
+    with open(df_html, 'r', encoding='utf-8') as file:
         return file.read()
 
 
@@ -56,8 +56,9 @@ def send_mail(assunto, titulo, tabela):
 
 if __name__ == '__main__':
     today_date = datetime.now().strftime('%Y-%m-%d')
-    html_file_path = 'execucao_orcamentaria_2024.html'
-    tabela = read_html(html_file_path)
+    
+    tabela = df_html
+    
     
     send_mail(
         f'Posição da execução orçamentária por UO 2024: {today_date}',
