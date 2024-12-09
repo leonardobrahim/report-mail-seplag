@@ -3,7 +3,7 @@ import pandas as pd
 
 
 #caminho do arquivo csv
-caminho_excel = r"C:\Workspace\valores_gerais.xlsx"
+caminho_excel = "valores_gerais.xlsx"
 df = pd.read_excel(caminho_excel)
 
 df_filtrado = df.query('Ano == 2024')
