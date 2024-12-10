@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 
-caminho_excel = r"C:\Workspace\valores_gerais.xlsx"
+caminho_excel = r"valores_gerais.xlsx"
 df = pd.read_excel(caminho_excel)
 
 df_filtrado = df.query('Ano == [2023, 2024]')
