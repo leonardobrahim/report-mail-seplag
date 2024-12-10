@@ -62,6 +62,6 @@ if __name__ == '__main__':
     
     send_mail(
         f'Posição da execução orçamentária por UO 2024: {today_date}',
-        f'<h1 style=" border-bottom: 1px solid #C8C8C8; font-size: 40px; text-align: center; color: #1e43a2; font-weight: bold;">Posição da execução orçamentária por UO 2024 - {today_date}</h1>',
+        f'<h1 style=" border-bottom: 1px solid #C8C8C8; font-size: 25px; text-align: center; color: #1e43a2; font-weight: bold;">Posição da execução orçamentária por UO 2024<br>{today_date}</h1>',
         tabela
     )
