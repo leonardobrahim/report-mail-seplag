@@ -5,11 +5,7 @@ from email.mime.text import MIMEText
 from datetime import datetime
 from dotenv import load_dotenv
 import os
-<<<<<<< HEAD
 from execucao_ano import df_html
-=======
-from gerartabela import df_html
->>>>>>> 1b38d1cae773ca579f12f0e62907e7a5d4bbfc74
 load_dotenv()
 
 SERVER = os.getenv('SERVER')
