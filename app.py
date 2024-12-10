@@ -1,29 +1,29 @@
-from email.mime.image import MIMEImage
-import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
+import smtplib
 from datetime import datetime
-from dotenv import load_dotenv
-import os
 from execucao_ano import df_html
-load_dotenv()
-
-SERVER = os.getenv('SERVER')
-PW = os.getenv('PASSWORD')
-REMETENTE = os.getenv('REMETENTE')
-DESTINATARIOS = os.getenv('DESTINATARIOS').split(',')
-PORTA = os.getenv('PORTA')
+import os
 
 
-def read_html(df_html):
-    with open(df_html, 'r', encoding='utf-8') as file:
-        return file.read()
-
+def adicionar_estilos_html(html):
+    html = html.replace(
+        '<table border="1" class="dataframe">',
+        '<table style="margin: 0 auto; border-collapse: collapse; width: 90%; font-family: Arial, sans-serif; border: 1px solid #dddddd;">'
+    ).replace(
+        '<th>',
+        '<th style="border: 1px solid #dddddd; padding: 8px; background-color: #f4f4f4; text-align: center;">'
+    ).replace(
+        '<td>',
+        '<td style="border: 1px solid #dddddd; padding: 8px; text-align: center;">'
+    )
+    return html
 
 def send_mail(assunto, titulo, tabela):
     msg = MIMEMultipart('related')
-    msg['From'] = REMETENTE
-    msg['To'] = ', '.join(DESTINATARIOS)
+    msg['From'] = os.getenv('REMETENTE')
+    msg['To'] = os.getenv('DESTINATARIOS')
     msg['Subject'] = assunto
     
     html_parte = MIMEText(
@@ -48,20 +48,18 @@ def send_mail(assunto, titulo, tabela):
         imageFooter.add_header('Content-ID', '<footer_image>')
         msg.attach(imageFooter)
 
-    with smtplib.SMTP(SERVER, PORTA) as server:
+    with smtplib.SMTP(os.getenv('SERVER'), os.getenv('PORTA')) as server:
         server.starttls()
-        server.login(REMETENTE, PW)
-        server.sendmail(REMETENTE, DESTINATARIOS, msg.as_string())
-
+        server.login(os.getenv('REMETENTE'), os.getenv('PASSWORD'))
+        server.sendmail(os.getenv('REMETENTE'), os.getenv('DESTINATARIOS'), msg.as_string())
 
 if __name__ == '__main__':
     today_date = datetime.now().strftime('%Y-%m-%d')
-    
-    tabela = df_html
-    
-    
+
+    tabela = adicionar_estilos_html(df_html)
+
     send_mail(
         f'Posição da execução orçamentária por UO 2024: {today_date}',
         f'<h1 style=" border-bottom: 1px solid #C8C8C8; font-size: 25px; text-align: center; color: #1e43a2; font-weight: bold;">Posição da execução orçamentária por UO 2024<br>{today_date}</h1>',
-        tabela
+        {tabela}
     )

@@ -27,6 +27,6 @@ colunas_desejadas = ['Ano','UGC','Dotação Autorizada', 'Liquidado','Liquidado 
 
 df_filtrado.columns = colunas_desejadas
 
-df_html = df_filtrado.to_html(float_format="{:.2f}".format)
+df_html = df_filtrado.to_html(float_format="{:.2f}".format, index = False)
 
 
